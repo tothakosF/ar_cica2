@@ -52,8 +52,6 @@ namespace cica2
         {
             // Adding cards to the deck
 
-            deck.Add("Bomba");
-
             player1.Add("-Hatástalanító-");
 
             player2.Add("-Hatástalanító-");
@@ -107,6 +105,19 @@ namespace cica2
                 deck.Add("Dinnye macska");
             }
 
+            Shuffle();
+
+            for (int i = 0; i < 7; i++)
+            {
+                player1.Add(deck[0]);
+                deck.Remove(deck[0]);
+
+                player2.Add(deck[1]);
+                deck.Remove(deck[1]);
+            }
+
+            deck.Add("Bomba");
+
             // Hiding labels for more interactive user interface
 
             player1Li.ItemsSource = player1;
@@ -117,39 +128,36 @@ namespace cica2
 
             startL.Visibility = Visibility.Collapsed;
 
-            up1B.Visibility= Visibility.Collapsed;
-            up2B.Visibility= Visibility.Collapsed;
+            up1B.Visibility = Visibility.Collapsed;
+            up2B.Visibility = Visibility.Collapsed;
 
-            selectedItem1L.Visibility= Visibility.Collapsed;
-            selectedItem2L.Visibility= Visibility.Collapsed;
+            selectedItem1L.Visibility = Visibility.Collapsed;
+            selectedItem2L.Visibility = Visibility.Collapsed;
 
-            p1TL.Visibility= Visibility.Collapsed;
-            p2TL.Visibility= Visibility.Collapsed;
+            p1TL.Visibility = Visibility.Collapsed;
+            p2TL.Visibility = Visibility.Collapsed;
 
             player1L.Visibility = Visibility.Collapsed;
             player2L.Visibility = Visibility.Collapsed;
 
-            current1L.Visibility= Visibility.Collapsed;
-            current2L.Visibility= Visibility.Collapsed;
+            current1L.Visibility = Visibility.Collapsed;
+            current2L.Visibility = Visibility.Collapsed;
 
-            down1B.Visibility= Visibility.Collapsed;
-            down2B.Visibility= Visibility.Collapsed;
+            down1B.Visibility = Visibility.Collapsed;
+            down2B.Visibility = Visibility.Collapsed;
 
             namesL.Visibility = Visibility.Visible;
 
-            p1T.IsReadOnly = false;
-            p2T.IsReadOnly = false;
-
             // Shuffling the deck and filling up the ListBoxes
 
-            shuffle();
+            Shuffle();
 
-            refresh();
+            Refresh();
         }
 
-        // Fisher-Yates shuffle
+        // Fisher-Yates Shuffle
 
-        private void shuffle()
+        private void Shuffle()
         {
             int lastIndex = deck.Count() - 1;
             while (lastIndex > 0)
@@ -165,7 +173,7 @@ namespace cica2
 
         // Refresh information to current state
 
-        private void refresh()
+        private void Refresh()
         {
             deckL.Content = deck.Count();
             player1L.Content = player1.Count();
@@ -188,7 +196,7 @@ namespace cica2
 
         // Advanced use of "macska" cards Player1
 
-        private bool tita1(string nev)
+        private bool Tita1(string nev)
         {
             int num = 0;
             foreach (string item in player1)
@@ -205,14 +213,14 @@ namespace cica2
             if (num >= 2)
             {
                 int num1 = 0;
-                for(int i = 0; i < player1.Count(); i++)
+                for (int i = 0; i < player1.Count(); i++)
                 {
                     if (player1[i] == nev)
                     {
                         num1++;
                         if (num1 == 2)
                         {
-                            refresh();
+                            Refresh();
                             return true;
                         }
                     }
@@ -223,7 +231,7 @@ namespace cica2
 
         // Advanced use of "macska" cards Player1
 
-        private bool tita2(string nev)
+        private bool Tita2(string nev)
         {
             int num = 0;
             foreach (string item in player2)
@@ -247,7 +255,7 @@ namespace cica2
                         num1++;
                         if (num1 == 2)
                         {
-                            refresh();
+                            Refresh();
                             return true;
                         }
                     }
@@ -263,6 +271,9 @@ namespace cica2
             p1Name = p1T.Text;
             p2Name = p2T.Text;
 
+            p1T.IsReadOnly = true;
+            p2T.IsReadOnly = true;
+
             p1TL.Visibility = Visibility.Visible;
             p1TL.Content = $"{p1Name} lapjainak száma:";
 
@@ -274,17 +285,14 @@ namespace cica2
 
             selectedItem1L.Visibility = Visibility.Visible;
             selectedItem2L.Visibility = Visibility.Visible;
-            
+
             current1L.Visibility = Visibility.Visible;
             current2L.Visibility = Visibility.Visible;
-            
+
             down1B.Visibility = Visibility.Visible;
             down2B.Visibility = Visibility.Visible;
-            
-            startL.Visibility = Visibility.Collapsed;
 
-            p1T.IsReadOnly = true;
-            p2T.IsReadOnly = true;
+            startL.Visibility = Visibility.Collapsed;
 
             textL.Content = "";
 
@@ -303,7 +311,7 @@ namespace cica2
                     up1B.IsEnabled = false;
                     up2B.IsEnabled = true;
 
-                    refresh();
+                    Refresh();
                 }
                 else if (deck[0] == "Bomba" && player1.Contains("-Hatástalanító-") && deck.Count == 1)
                 {
@@ -312,7 +320,7 @@ namespace cica2
                     up1B.IsEnabled = false;
                     up2B.IsEnabled = true;
 
-                    refresh();
+                    Refresh();
                 }
                 else if (deck[0] == "Bomba" && !player1.Contains("-Hatástalanító-"))
                 {
@@ -329,7 +337,7 @@ namespace cica2
                 up1B.IsEnabled = false;
                 up2B.IsEnabled = true;
 
-                refresh();
+                Refresh();
             }
         }
 
@@ -337,6 +345,9 @@ namespace cica2
         {
             p1Name = p1T.Text;
             p2Name = p2T.Text;
+
+            p1T.IsReadOnly = true;
+            p2T.IsReadOnly = true;
 
             p1TL.Visibility = Visibility.Visible;
             p1TL.Content = $"{p1Name} lapjainak száma:";
@@ -346,20 +357,17 @@ namespace cica2
 
             down1B.Visibility = Visibility.Visible;
             down2B.Visibility = Visibility.Visible;
-            
+
             selectedItem1L.Visibility = Visibility.Visible;
             selectedItem2L.Visibility = Visibility.Visible;
-            
+
             current1L.Visibility = Visibility.Visible;
             current2L.Visibility = Visibility.Visible;
-            
+
             down1B.Visibility = Visibility.Visible;
             down2B.Visibility = Visibility.Visible;
-            
-            startL.Visibility = Visibility.Collapsed;
 
-            p1T.IsReadOnly = true;
-            p2T.IsReadOnly = true;
+            startL.Visibility = Visibility.Collapsed;
 
             textL.Content = "";
 
@@ -378,7 +386,7 @@ namespace cica2
                     up1B.IsEnabled = true;
                     up2B.IsEnabled = false;
 
-                    refresh();
+                    Refresh();
                 }
                 else if (deck[0] == "Bomba" && player2.Contains("-Hatástalanító-") && deck.Count == 1)
                 {
@@ -387,7 +395,7 @@ namespace cica2
                     up1B.IsEnabled = true;
                     up2B.IsEnabled = false;
 
-                    refresh();
+                    Refresh();
                 }
                 else if (deck[0] == "Bomba" && !player2.Contains("-Hatástalanító-"))
                 {
@@ -404,7 +412,7 @@ namespace cica2
                 up1B.IsEnabled = true;
                 up2B.IsEnabled = false;
 
-                refresh();
+                Refresh();
             }
         }
 
@@ -416,27 +424,27 @@ namespace cica2
             {
                 player1.Remove(kival);
                 textL.Content = "";
-                shuffle();
-                refresh();
+                Shuffle();
+                Refresh();
             }
             if (kival == "Ugrás")
             {
                 textL.Content = "";
-                player1.Remove(kival); 
+                player1.Remove(kival);
                 up1B.IsEnabled = false;
                 up2B.IsEnabled = true;
                 down1B.IsEnabled = false;
-                refresh();
+                Refresh();
                 textL.Content = "";
             }
             if (kival == "Szívesség")
             {
                 textL.Content = "";
-                player1.Remove(kival); 
+                player1.Remove(kival);
                 int player2szam = r.Next(player2.Count() - 1);
                 player1.Add(player2[player2szam]);
                 player2.RemoveAt(player2szam);
-                refresh();
+                Refresh();
             }
             if (kival == "Jövőbe látás")
             {
@@ -456,7 +464,7 @@ namespace cica2
 
                 player1.Remove(kival);
 
-                refresh();
+                Refresh();
 
                 textL.Foreground = Brushes.Black;
                 textL.Background = Brushes.Black;
@@ -482,7 +490,7 @@ namespace cica2
                         up1B.IsEnabled = true;
                         up2B.IsEnabled = false;
 
-                        refresh();
+                        Refresh();
                     }
                     else if (deck[0] == "Bomba" && player2.Contains("-Hatástalanító-") && deck.Count == 1)
                     {
@@ -491,7 +499,7 @@ namespace cica2
                         up1B.IsEnabled = true;
                         up2B.IsEnabled = false;
 
-                        refresh();
+                        Refresh();
                     }
                     else if (deck[0] == "Bomba" && !player2.Contains("-Hatástalanító-"))
                     {
@@ -505,7 +513,7 @@ namespace cica2
                     deck.Remove(deck[0]);
                     down1B.IsEnabled = false;
 
-                    refresh();
+                    Refresh();
                 }
             }
             if (kival == "Nope")
@@ -515,7 +523,7 @@ namespace cica2
             if (kival == "Taco macska")
             {
                 textL.Content = "";
-                if (tita1("Taco macska") == true)
+                if (Tita1("Taco macska") == true)
                 {
                     player1.Remove(kival);
                     player1.Remove(kival);
@@ -523,13 +531,13 @@ namespace cica2
                     int ellenfel = r.Next(player2.Count - 1);
                     player1.Add(player2[ellenfel]);
                     player2.RemoveAt(ellenfel);
-                    refresh();
+                    Refresh();
                 }
             }
             if (kival == "Dinnye macska")
             {
                 textL.Content = "";
-                if (tita1("Dinnye macska") == true)
+                if (Tita1("Dinnye macska") == true)
                 {
                     player1.Remove(kival);
                     player1.Remove(kival);
@@ -537,13 +545,13 @@ namespace cica2
                     int ellenfel = r.Next(player2.Count - 1);
                     player1.Add(player2[ellenfel]);
                     player2.RemoveAt(ellenfel);
-                    refresh();
+                    Refresh();
                 }
             }
             if (kival == "Ször macska")
             {
                 textL.Content = "";
-                if (tita1("Ször macska") == true)
+                if (Tita1("Ször macska") == true)
                 {
                     player1.Remove(kival);
                     player1.Remove(kival);
@@ -551,13 +559,13 @@ namespace cica2
                     int ellenfel = r.Next(player2.Count - 1);
                     player1.Add(player2[ellenfel]);
                     player2.RemoveAt(ellenfel);
-                    refresh();
+                    Refresh();
                 }
             }
             if (kival == "Krumpli macska")
             {
                 textL.Content = "";
-                if (tita1("Krumpli macska") == true)
+                if (Tita1("Krumpli macska") == true)
                 {
                     player1.Remove(kival);
                     player1.Remove(kival);
@@ -565,13 +573,13 @@ namespace cica2
                     int ellenfel = r.Next(player2.Count - 1);
                     player1.Add(player2[ellenfel]);
                     player2.RemoveAt(ellenfel);
-                    refresh();
+                    Refresh();
                 }
             }
             if (kival == "Szivárvány macska")
             {
                 textL.Content = "";
-                if (tita1("Szivárvány macska") == true)
+                if (Tita1("Szivárvány macska") == true)
                 {
                     player1.Remove(kival);
                     player1.Remove(kival);
@@ -579,7 +587,7 @@ namespace cica2
                     int ellenfel = r.Next(player2.Count - 1);
                     player1.Add(player2[ellenfel]);
                     player2.RemoveAt(ellenfel);
-                    refresh();
+                    Refresh();
                 }
             }
         }
@@ -590,8 +598,8 @@ namespace cica2
             {
                 textL.Content = "";
                 player2.Remove(kival);
-                shuffle();
-                refresh();
+                Shuffle();
+                Refresh();
             }
             if (kival == "Ugrás")
             {
@@ -600,7 +608,7 @@ namespace cica2
                 up1B.IsEnabled = true;
                 up2B.IsEnabled = false;
                 down2B.IsEnabled = false;
-                refresh();
+                Refresh();
             }
             if (kival == "Szívesség")
             {
@@ -609,7 +617,7 @@ namespace cica2
                 int player2szam = r.Next(player1.Count() - 1);
                 player2.Add(player2[player2szam]);
                 player1.RemoveAt(player2szam);
-                refresh();
+                Refresh();
             }
             if (kival == "Jövőbe látás")
             {
@@ -629,7 +637,7 @@ namespace cica2
 
                 player2.Remove(kival);
 
-                refresh();
+                Refresh();
 
                 textL.Foreground = Brushes.Black;
                 textL.Background = Brushes.Black;
@@ -655,7 +663,7 @@ namespace cica2
                         up1B.IsEnabled = false;
                         up2B.IsEnabled = true;
 
-                        refresh();
+                        Refresh();
                     }
                     else if (deck[0] == "Bomba" && player1.Contains("-Hatástalanító-") && deck.Count == 1)
                     {
@@ -664,7 +672,7 @@ namespace cica2
                         up1B.IsEnabled = false;
                         up2B.IsEnabled = true;
 
-                        refresh();
+                        Refresh();
                     }
                     else if (deck[0] == "Bomba" && !player1.Contains("-Hatástalanító-"))
                     {
@@ -678,7 +686,7 @@ namespace cica2
                     deck.Remove(deck[0]);
                     down2B.IsEnabled = false;
 
-                    refresh();
+                    Refresh();
                 }
             }
             if (kival == "Nope")
@@ -689,66 +697,66 @@ namespace cica2
             if (kival == "Taco macska")
             {
                 textL.Content = "";
-                if (tita2("Taco macska") == true)
+                if (Tita2("Taco macska") == true)
                 {
                     player2.Remove(kival);
                     player2.Remove(kival);
                     int ellenfel = r.Next(player1.Count - 1);
                     player2.Add(player1[ellenfel]);
                     player1.RemoveAt(ellenfel);
-                    refresh();
+                    Refresh();
                 }
             }
             if (kival == "Dinnye macska")
             {
                 textL.Content = "";
-                if (tita2("Dinnye macska") == true)
+                if (Tita2("Dinnye macska") == true)
                 {
                     player2.Remove(kival);
                     player2.Remove(kival);
                     int ellenfel = r.Next(player1.Count - 1);
                     player2.Add(player1[ellenfel]);
                     player1.RemoveAt(ellenfel);
-                    refresh();
+                    Refresh();
                 }
             }
             if (kival == "Ször macska")
             {
                 textL.Content = "";
-                if (tita2("Ször macska") == true)
+                if (Tita2("Ször macska") == true)
                 {
                     player2.Remove(kival);
                     player2.Remove(kival);
                     int ellenfel = r.Next(player1.Count - 1);
                     player2.Add(player1[ellenfel]);
                     player1.RemoveAt(ellenfel);
-                    refresh();
+                    Refresh();
                 }
             }
             if (kival == "Krumpli macska")
             {
                 textL.Content = "";
-                if (tita2("Krumpli macska") == true)
+                if (Tita2("Krumpli macska") == true)
                 {
                     player2.Remove(kival);
                     player2.Remove(kival);
                     int ellenfel = r.Next(player1.Count - 1);
                     player2.Add(player1[ellenfel]);
                     player1.RemoveAt(ellenfel);
-                    refresh();
+                    Refresh();
                 }
             }
             if (kival == "Szivárvány macska")
             {
                 textL.Content = "";
-                if (tita2("Szivárvány macska") == true)
+                if (Tita2("Szivárvány macska") == true)
                 {
                     player2.Remove(kival);
                     player2.Remove(kival);
                     int ellenfel = r.Next(player1.Count - 1);
                     player2.Add(player1[ellenfel]);
                     player1.RemoveAt(ellenfel);
-                    refresh();
+                    Refresh();
                 }
             }
         }
@@ -823,8 +831,8 @@ namespace cica2
                 down1B.Visibility = Visibility.Collapsed;
                 down2B.Visibility = Visibility.Collapsed;
 
-                up1B.Visibility= Visibility.Visible;
-                up2B.Visibility= Visibility.Visible;
+                up1B.Visibility = Visibility.Visible;
+                up2B.Visibility = Visibility.Visible;
 
                 player1L.Visibility = Visibility.Visible;
                 player2L.Visibility = Visibility.Visible;
@@ -857,12 +865,18 @@ namespace cica2
 
         private void p1T_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            p1T.Clear();
+            if (p1T.Text == "Player 1")
+            {
+                p1T.Clear();
+            }
         }
 
         private void p2T_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            p2T.Clear();
+            if (p2T.Text == "Player 2")
+            {
+                p2T.Clear();
+            }
         }
 
         private void xL_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
