@@ -513,6 +513,9 @@ namespace cica2
                     deck.Remove(deck[0]);
                     down1B.IsEnabled = false;
 
+                    up1B.IsEnabled = true;
+                    up2B.IsEnabled = false;
+
                     Refresh();
                 }
             }
@@ -685,6 +688,9 @@ namespace cica2
                     player1.Add(deck[0]);
                     deck.Remove(deck[0]);
                     down2B.IsEnabled = false;
+
+                    up1B.IsEnabled = true;
+                    up2B.IsEnabled = false;
 
                     Refresh();
                 }
