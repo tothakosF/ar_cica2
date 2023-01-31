@@ -107,7 +107,7 @@ namespace cica2
 
             Shuffle();
 
-            for (int i = 0;i < 7; i++)
+            for (int i = 0; i < 7; i++)
             {
                 player1.Add(deck[0]);
                 deck.Remove(deck[0]);
@@ -128,23 +128,23 @@ namespace cica2
 
             startL.Visibility = Visibility.Collapsed;
 
-            up1B.Visibility= Visibility.Collapsed;
-            up2B.Visibility= Visibility.Collapsed;
+            up1B.Visibility = Visibility.Collapsed;
+            up2B.Visibility = Visibility.Collapsed;
 
-            selectedItem1L.Visibility= Visibility.Collapsed;
-            selectedItem2L.Visibility= Visibility.Collapsed;
+            selectedItem1L.Visibility = Visibility.Collapsed;
+            selectedItem2L.Visibility = Visibility.Collapsed;
 
-            p1TL.Visibility= Visibility.Collapsed;
-            p2TL.Visibility= Visibility.Collapsed;
+            p1TL.Visibility = Visibility.Collapsed;
+            p2TL.Visibility = Visibility.Collapsed;
 
             player1L.Visibility = Visibility.Collapsed;
             player2L.Visibility = Visibility.Collapsed;
 
-            current1L.Visibility= Visibility.Collapsed;
-            current2L.Visibility= Visibility.Collapsed;
+            current1L.Visibility = Visibility.Collapsed;
+            current2L.Visibility = Visibility.Collapsed;
 
-            down1B.Visibility= Visibility.Collapsed;
-            down2B.Visibility= Visibility.Collapsed;
+            down1B.Visibility = Visibility.Collapsed;
+            down2B.Visibility = Visibility.Collapsed;
 
             namesL.Visibility = Visibility.Visible;
 
@@ -213,7 +213,7 @@ namespace cica2
             if (num >= 2)
             {
                 int num1 = 0;
-                for(int i = 0; i < player1.Count(); i++)
+                for (int i = 0; i < player1.Count(); i++)
                 {
                     if (player1[i] == nev)
                     {
@@ -285,13 +285,13 @@ namespace cica2
 
             selectedItem1L.Visibility = Visibility.Visible;
             selectedItem2L.Visibility = Visibility.Visible;
-            
+
             current1L.Visibility = Visibility.Visible;
             current2L.Visibility = Visibility.Visible;
-            
+
             down1B.Visibility = Visibility.Visible;
             down2B.Visibility = Visibility.Visible;
-            
+
             startL.Visibility = Visibility.Collapsed;
 
             textL.Content = "";
@@ -357,16 +357,16 @@ namespace cica2
 
             down1B.Visibility = Visibility.Visible;
             down2B.Visibility = Visibility.Visible;
-            
+
             selectedItem1L.Visibility = Visibility.Visible;
             selectedItem2L.Visibility = Visibility.Visible;
-            
+
             current1L.Visibility = Visibility.Visible;
             current2L.Visibility = Visibility.Visible;
-            
+
             down1B.Visibility = Visibility.Visible;
             down2B.Visibility = Visibility.Visible;
-            
+
             startL.Visibility = Visibility.Collapsed;
 
             textL.Content = "";
@@ -430,7 +430,7 @@ namespace cica2
             if (kival == "Ugrás")
             {
                 textL.Content = "";
-                player1.Remove(kival); 
+                player1.Remove(kival);
                 up1B.IsEnabled = false;
                 up2B.IsEnabled = true;
                 down1B.IsEnabled = false;
@@ -440,7 +440,7 @@ namespace cica2
             if (kival == "Szívesség")
             {
                 textL.Content = "";
-                player1.Remove(kival); 
+                player1.Remove(kival);
                 int player2szam = r.Next(player2.Count() - 1);
                 player1.Add(player2[player2szam]);
                 player2.RemoveAt(player2szam);
@@ -512,6 +512,9 @@ namespace cica2
                     player2.Add(deck[0]);
                     deck.Remove(deck[0]);
                     down1B.IsEnabled = false;
+
+                    up1B.IsEnabled = true;
+                    up2B.IsEnabled = false;
 
                     Refresh();
                 }
@@ -686,6 +689,9 @@ namespace cica2
                     deck.Remove(deck[0]);
                     down2B.IsEnabled = false;
 
+                    up1B.IsEnabled = true;
+                    up2B.IsEnabled = false;
+
                     Refresh();
                 }
             }
@@ -831,8 +837,8 @@ namespace cica2
                 down1B.Visibility = Visibility.Collapsed;
                 down2B.Visibility = Visibility.Collapsed;
 
-                up1B.Visibility= Visibility.Visible;
-                up2B.Visibility= Visibility.Visible;
+                up1B.Visibility = Visibility.Visible;
+                up2B.Visibility = Visibility.Visible;
 
                 player1L.Visibility = Visibility.Visible;
                 player2L.Visibility = Visibility.Visible;
